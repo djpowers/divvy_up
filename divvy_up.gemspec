@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = DivvyUp::VERSION
   spec.authors       = ["Dave Powers"]
   spec.email         = ["djpowers89@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
+  spec.summary       = %q{Divvy up purchases to split amongst friends}
   spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/djpowers/divvy_up"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
