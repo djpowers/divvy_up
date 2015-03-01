@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Dave Powers"]
   spec.email         = ["djpowers89@gmail.com"]
   spec.summary       = %q{Divvy up purchases to split amongst friends}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.description   = %q{Divvy up purchases to split amongst friends}
   spec.homepage      = "https://github.com/djpowers/divvy_up"
   spec.license       = "MIT"
 
