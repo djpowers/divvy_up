@@ -1,17 +1,6 @@
 module DivvyUp
   describe List do
-
-    it "exists" do
-      expect(DivvyUp::List)
-    end
-
-    it "creates a new list" do
-      list = DivvyUp::List.new({juice: 3, apple: 1.20, chicken: 7.99})
-      expect(list.items).to eql({juice: 3, apple: 1.20, chicken: 7.99})
-    end
-
-    it "splits a list into one group" do
-      items = {
+    let(:shopping_list) { {
         orange_juice: 3,
         lettuce: 7,
         strawberries: 3,
@@ -25,8 +14,20 @@ module DivvyUp
         pepper: 2,
         celery: 1.69
       }
-      list = DivvyUp::List.new(items)
-      expect(list.split(1)).to eql([items])
+    }
+
+    it "exists" do
+      expect(DivvyUp::List)
+    end
+
+    it "creates a new list" do
+      list = DivvyUp::List.new({juice: 3, apple: 1.20, chicken: 7.99})
+      expect(list.items).to eql({juice: 3, apple: 1.20, chicken: 7.99})
+    end
+
+    it "splits a list into one group" do
+      list = DivvyUp::List.new(shopping_list)
+      expect(list.split(1)).to eql([shopping_list])
     end
   end
 end
