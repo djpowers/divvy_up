@@ -34,5 +34,12 @@ module DivvyUp
       list = DivvyUp::List.new({carrots: 2.50, celery: 2})
       expect(list.split(2)).to eql([{carrots: 2.50}, {celery: 2}])
     end
+
+    it "splits a small list into two groups" do
+      list = DivvyUp::List.new({apples: 1.20, bananas: 2.40,
+                                pears: 3.20, melon: 4.60})
+      expect(list.split(2)).to eql([{apples: 1.20, melon: 4.60},
+                                   {bananas: 2.40, pears: 3.20}])
+    end
   end
 end
