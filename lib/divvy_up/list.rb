@@ -12,7 +12,7 @@ module DivvyUp
       permutation_price_differences = calculate_permutation_price_differences(permutations, groups)
       sorted_price_differences = generate_list_combinations(permutation_price_differences)
       list_possibilities = find_full_list(permutation_price_differences, sorted_price_differences)
-      output_final_lists(list_possibilities)
+      output_final_lists(list_possibilities, groups)
     end
 
     private
@@ -74,12 +74,19 @@ module DivvyUp
       output
     end
 
-    def output_final_lists(lists)
-      index = 1
-      until (lists.first.keys + lists[index].keys).sort == self.items.keys.sort
-        index += 1
+    def output_final_lists(lists, groups)
+      output = []
+      accounted_items = []
+      until output.size == groups
+        lists.each do |list|
+          if (accounted_items & list.keys).empty?
+            output << list
+            accounted_items << list.keys
+            accounted_items.flatten!
+          end
+        end
       end
-      [lists.first, lists[index]]
+      output
     end
   end
 end
