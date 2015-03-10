@@ -80,7 +80,7 @@ module DivvyUp
       until output.size == groups
         lists.each do |list|
           if (accounted_items & list.keys).empty?
-            output << list
+            output << [list, (list.values.reduce(:+)).round(2)]
             accounted_items << list.keys
             accounted_items.flatten!
           end

@@ -32,23 +32,23 @@ module DivvyUp
 
     it "splits a two-item list into two groups" do
       list = DivvyUp::List.new({carrots: 2.50, celery: 2})
-      expect(list.split(2)).to eql([{carrots: 2.50}, {celery: 2}])
+      expect(list.split(2)).to eql([[{carrots: 2.50}, 2.50], [{celery: 2}, 2.0]])
     end
 
     it "splits a small list into two groups" do
       list = DivvyUp::List.new({apples: 1.20, bananas: 2.40,
                                 pears: 3.20, melon: 4.60})
-      expect(list.split(2)).to eql([{apples: 1.20, melon: 4.60},
-                                   {bananas: 2.40, pears: 3.20}])
+      expect(list.split(2)).to eql([[{apples: 1.20, melon: 4.60}, 5.80],
+                                   [{bananas: 2.40, pears: 3.20}, 5.60]])
     end
 
     it "split a list into three groups" do
       list = DivvyUp::List.new(shopping_list)
       expect(list.split(3)).to eql(
         [
-          {orange_juice: 3, eggs: 2.79, carrots: 2.5, onion: 1.25, celery: 1.69},
-          {lettuce: 7, strawberries: 3, tomato: 1.25},
-          {blueberries: 3.99, butter: 2.69, pasta_sauce: 2.5, pepper: 2}
+          [{orange_juice: 3, eggs: 2.79, carrots: 2.5, onion: 1.25, celery: 1.69}, 11.23],
+          [{lettuce: 7, strawberries: 3, tomato: 1.25}, 11.25],
+          [{blueberries: 3.99, butter: 2.69, pasta_sauce: 2.5, pepper: 2}, 11.18]
         ]
       )
     end
