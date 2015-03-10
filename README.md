@@ -40,26 +40,14 @@ shopping_list = {
 DivvyUp::List.new(shopping_list).split(3)
 # =>
 # [
-#   {
-#     carrots: 2.5,
-#     lettuce: 7,
-#     celery: 1.69
-#   },
-#   {
-#     eggs: 2.79,
-#     pepper: 2,
-#     onion: 1.25,
-#     tomato: 1.25,
-#     blueberries: 3.99
-#   },
-#   {
-#     butter: 2.69,
-#     pasta_sauce: 2.5,
-#     orange_juice: 3,
-#     strawberries: 3
-#   }
+#   [{:orange_juice=>3, :eggs=>2.79, :carrots=>2.5, :onion=>1.25, :celery=>1.69}, 11.23],
+#   [{:lettuce=>7, :strawberries=>3, :tomato=>1.25}, 11.25],
+#   [{:blueberries=>3.99, :butter=>2.69, :pasta_sauce=>2.5, :pepper=>2}, 11.18]
 # ]
 ```
+
+Output of `#split` method consists of an array of arrays, where each subarray
+is a hash of items and the total value of those items.
 
 ## Contributing
 
