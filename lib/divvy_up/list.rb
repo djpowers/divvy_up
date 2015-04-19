@@ -9,11 +9,11 @@ module DivvyUp
     def split(groups)
       @groups = groups
       return [self.items] if @groups == 1
-      permutations = sublist_permutations
-      price_differences = sublist_price_differences(permutations)
+      sublists = sublist_permutations
+      price_differences = sublist_price_differences(sublists)
       sorted_price_differences = generate_list_combinations(price_differences)
       list_possibilities = find_full_list(price_differences, sorted_price_differences)
-      output_final_lists(list_possibilities, groups)
+      output_final_lists(list_possibilities)
     end
 
     private
@@ -34,15 +34,15 @@ module DivvyUp
     end
 
     def sublist_price_differences(permutations)
-      permutation_price_differences = {}
+      price_differences = {}
       permutations.each do |permutation|
         total = 0.0
         permutation.each_with_index do |item, n|
           total += self.items[item]
         end
-        permutation_price_differences[permutation] = (target_amount(@groups) - total).abs
+        price_differences[permutation] = (target_amount(@groups) - total).abs
       end
-      permutation_price_differences
+      price_differences
     end
 
     def generate_list_combinations(permutation_price_differences)
@@ -75,10 +75,10 @@ module DivvyUp
       output
     end
 
-    def output_final_lists(lists, groups)
+    def output_final_lists(lists)
       output = []
       accounted_items = []
-      until output.size == groups
+      until output.size == @groups
         lists.each do |list|
           if (accounted_items & list.keys).empty?
             output << [list, (list.values.reduce(:+)).round(2)]
