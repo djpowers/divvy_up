@@ -11,7 +11,7 @@ module DivvyUp
       return [self.items] if @groups == 1
       sublists = sublist_permutations
       price_differences = sublist_price_differences(sublists)
-      sorted_price_differences = generate_list_combinations(price_differences)
+      sorted_price_differences = price_differences.values.sort
       list_possibilities = find_full_list(price_differences, sorted_price_differences)
       output_final_lists(list_possibilities)
     end
@@ -43,10 +43,6 @@ module DivvyUp
         price_differences[permutation] = (target_amount(@groups) - total).abs
       end
       price_differences
-    end
-
-    def generate_list_combinations(permutation_price_differences)
-      permutation_price_differences.values.sort
     end
 
     def find_full_list(permutation_price_differences, sorted_price_differences)
