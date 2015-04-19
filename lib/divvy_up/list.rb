@@ -45,13 +45,13 @@ module DivvyUp
       price_differences
     end
 
-    def find_full_list(permutation_price_differences, sorted_price_differences)
+    def find_full_list(price_differences, sorted_price_differences)
       list = []
       sorted_price_differences.each do |difference|
         if sorted_price_differences.count(difference) == 1
-          list << permutation_price_differences.key(difference)
+          list << price_differences.key(difference)
         else
-          permutation_price_differences.find_all{|k,v| v == difference}.map(&:first).each do |permutation|
+          price_differences.find_all{|k,v| v == difference}.map(&:first).each do |permutation|
             list << permutation
           end
           sorted_price_differences.delete(difference)
