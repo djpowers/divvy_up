@@ -8,7 +8,7 @@ module DivvyUp
 
     def split(groups)
       return [self.items] if groups == 1
-      permutations = generate_list_permutations
+      permutations = sublist_permutations
       permutation_price_differences = calculate_permutation_price_differences(permutations, groups)
       sorted_price_differences = generate_list_combinations(permutation_price_differences)
       list_possibilities = find_full_list(permutation_price_differences, sorted_price_differences)
@@ -21,15 +21,15 @@ module DivvyUp
       (self.items.values.reduce(:+) / divisor).round(2)
     end
 
-    def generate_list_permutations
-      permutations = []
+    def sublist_permutations
+      sublists = []
       self.items.keys.size.times do |n|
         sets = self.items.keys.combination(n+1)
         sets.each do |set|
-          permutations << set
+          sublists << set
         end
       end
-      permutations
+      sublists
     end
 
     def calculate_permutation_price_differences(permutations, divisor)
