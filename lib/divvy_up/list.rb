@@ -11,9 +11,8 @@ module DivvyUp
       return [self.items] if @groups == 1
       sublists = sublist_permutations
       price_differences = sublist_price_differences(sublists)
-      sorted_price_differences = price_differences.values.sort
-      list_possibilities = find_full_list(price_differences, sorted_price_differences)
-      output_final_lists(list_possibilities)
+      sublist_options_sorted = sort_sublist_options(price_differences)
+      output_final_sublists(sublist_options_sorted)
     end
 
     private
@@ -45,13 +44,16 @@ module DivvyUp
       price_differences
     end
 
-    def find_full_list(price_differences, sorted_price_differences)
+    def sort_sublist_options(price_differences)
       list = []
+      sorted_price_differences = price_differences.values.sort
       sorted_price_differences.each do |difference|
         if sorted_price_differences.count(difference) == 1
           list << price_differences.key(difference)
         else
-          price_differences.find_all{|k,v| v == difference}.map(&:first).each do |permutation|
+          price_differences.find_all do |k,v|
+            v == difference
+          end.map(&:first).each do |permutation|
             list << permutation
           end
           sorted_price_differences.delete(difference)
@@ -59,31 +61,31 @@ module DivvyUp
       end
       flattened_list = list.flatten
       if self.items.keys.sort == flattened_list.uniq.sort
-        output = []
+        sublist_options_sorted = []
         list.each do |sublist|
           item_price = {}
           sublist.each do |item|
             item_price[item] = self.items[item]
           end
-          output << item_price
+          sublist_options_sorted << item_price
         end
       end
-      output
+      sublist_options_sorted
     end
 
-    def output_final_lists(lists)
-      output = []
+    def output_final_sublists(sublist_options_sorted)
+      sublists = []
       accounted_items = []
-      until output.size == @groups
-        lists.each do |list|
+      until sublists.size == @groups
+        sublist_options_sorted.each do |list|
           if (accounted_items & list.keys).empty?
-            output << [list, (list.values.reduce(:+)).round(2)]
+            sublists << [list, (list.values.reduce(:+)).round(2)]
             accounted_items << list.keys
             accounted_items.flatten!
           end
         end
       end
-      output
+      sublists
     end
   end
 end
