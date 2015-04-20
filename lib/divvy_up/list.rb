@@ -24,10 +24,7 @@ module DivvyUp
     def sublist_permutations
       sublists = []
       self.items.keys.size.times do |n|
-        sets = self.items.keys.combination(n+1)
-        sets.each do |set|
-          sublists << set
-        end
+        self.items.keys.combination(n+1).collect {|x| sublists << x}
       end
       sublists
     end
