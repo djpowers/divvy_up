@@ -3,6 +3,8 @@
 A Ruby gem to divvy up a list of item prices into smaller groups,
 for the purpose of splitting up purchases (somehwat) equally.
 
+A variation of sorts on the [knapsack problem](http://en.wikipedia.org/wiki/Knapsack_problem).
+
 ## Installation
 
 Add this line to your application's Gemfile:
