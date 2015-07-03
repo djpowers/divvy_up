@@ -51,7 +51,7 @@ module DivvyUp
           if total > target_amount(groups)
             permutation.delete(next_item.first)
             unassigned_items << next_item
-          end unless permutation == permutations.last
+          end unless permutation == permutations.last || permutation.count == 1
         end
       end
       calculate_list_totals(permutations, groups)
@@ -130,7 +130,22 @@ module DivvyUp
     end
 
     def determine_best_result(groups)
-      permute(groups)
+      permute_result = permute(groups)
+      snake_result = snake(groups)
+      price_is_right_result = price_is_right(groups)
+      results = [permute_result, snake_result, price_is_right_result]
+      target = target_amount(groups)
+      result_differences = []
+      results.each do |result|
+        result_totals = []
+        result.each do |list|
+          result_totals << list.last
+        end
+        min_difference = (result_totals.min - target).abs
+        max_difference = (result_totals.max - target).abs
+        result_differences << (min_difference > max_difference ? min_difference : max_difference)
+      end
+      results[result_differences.index(result_differences.min)]
     end
   end
 end
