@@ -17,6 +17,20 @@ module DivvyUp
 
     private
 
+    def snake(groups)
+      unassigned_items = self.items.sort_by { |item, price| price }.to_a
+      permutations = []
+      groups.times { permutations << [] }
+      until unassigned_items.empty? do
+        permutations.each do |permutation|
+          permutation << unassigned_items.pop
+        end
+        permutations.reverse_each do |permutation|
+          permutation << unassigned_items.pop
+        end
+      end
+    end
+
     def target_amount(divisor)
       (self.items.values.reduce(:+) / divisor).round(2)
     end
