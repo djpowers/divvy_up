@@ -20,28 +20,33 @@ module DivvyUp
     def snake(groups)
       unassigned_items = self.items.sort_by { |item, price| price }.to_a
       permutations = []
-      groups.times { permutations << [] }
+      groups.times { permutations << {} }
       until unassigned_items.empty? do
         permutations.each do |permutation|
-          permutation << unassigned_items.pop
+          permutation[unassigned_items.last.first] = unassigned_items.last.last
+          unassigned_items.pop
         end
         permutations.reverse_each do |permutation|
-          permutation << unassigned_items.pop
+          permutation[unassigned_items.last.first] = unassigned_items.last.last unless unassigned_items.empty?
+          unassigned_items.pop
         end
       end
+      permutations
     end
 
     def price_is_right(groups)
       unassigned_items = self.items.sort_by { |item, price| price }.to_a
       permutations = []
-      groups.times { permutations << [] }
+      groups.times { permutations << {} }
       permutations.each do |permutation|
         total = 0
         until total > target_amount(groups) || unassigned_items.empty? do
-          permutation << unassigned_items.pop
-          total = permutation.to_h.values.reduce(:+).nil? ? 0 : permutation.to_h.values.reduce(:+)
+          next_item = unassigned_items.pop
+          permutation[next_item.first] = next_item.last
+          total = permutation.values.reduce(:+).nil? ? 0 : permutation.values.reduce(:+)
           if total > target_amount(groups)
-            unassigned_items << permutation.pop
+            permutation.delete(next_item.first)
+            unassigned_items << next_item
           end unless permutation == permutations.last
         end
       end
