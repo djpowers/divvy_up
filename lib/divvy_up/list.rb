@@ -31,6 +31,22 @@ module DivvyUp
       end
     end
 
+    def price_is_right(groups)
+      unassigned_items = self.items.sort_by { |item, price| price }.to_a
+      permutations = []
+      groups.times { permutations << [] }
+      permutations.each do |permutation|
+        total = 0
+        until total > target_amount(groups) || unassigned_items.empty? do
+          permutation << unassigned_items.pop
+          total = permutation.to_h.values.reduce(:+).nil? ? 0 : permutation.to_h.values.reduce(:+)
+          if total > target_amount(groups)
+            unassigned_items << permutation.pop
+          end unless permutation == permutations.last
+        end
+      end
+    end
+
     def target_amount(divisor)
       (self.items.values.reduce(:+) / divisor).round(2)
     end
