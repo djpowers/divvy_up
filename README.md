@@ -1,5 +1,7 @@
 # DivvyUp
 
+[![Gem Version](https://badge.fury.io/rb/divvy_up.svg)](http://badge.fury.io/rb/divvy_up)
+
 A Ruby gem to divvy up a list of item prices into smaller groups,
 for the purpose of splitting up purchases (somehwat) equally.
 
