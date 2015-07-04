@@ -42,13 +42,37 @@ module DivvyUp
                                    [{bananas: 2.40, pears: 3.20}, 5.60]])
     end
 
-    it "split a list into three groups" do
+    it "splits a list into three groups" do
       list = DivvyUp::List.new(shopping_list)
       expect(list.split(3)).to eql(
         [
           [{orange_juice: 3, eggs: 2.79, carrots: 2.5, onion: 1.25, celery: 1.69}, 11.23],
           [{lettuce: 7, strawberries: 3, tomato: 1.25}, 11.25],
           [{blueberries: 3.99, butter: 2.69, pasta_sauce: 2.5, pepper: 2}, 11.18]
+        ]
+      )
+    end
+
+    it "splits a list using the 'snake' technique" do
+      shopping_list = { orange_juice: 3, colored_pepper: 1.99, spring_mix_7_oz: 4.99, pasta_sauce: 2.50, blueberries: 3.99, onion: 1.25 }
+      list = DivvyUp::List.new(shopping_list)
+      expect(list.split(3)).to eql(
+        [
+          [{spring_mix_7_oz: 4.99, onion: 1.25}, 6.24],
+          [{blueberries: 3.99, colored_pepper: 1.99}, 5.98],
+          [{orange_juice: 3, pasta_sauce: 2.5}, 5.5]
+        ]
+      )
+    end
+
+    it "splits a list using the 'price is right' technique" do
+      shopping_list = { milk: 2.49, bread: 1.99, cheese: 3.50, celery: 2.99, yogurt: 2.99, ham: 4.99, potatoes: 2, belvita_bars: 3.49, rice: 5, chicken: 6.49 }
+      list = DivvyUp::List.new(shopping_list)
+      expect(list.split(3)).to eql(
+        [
+          [{chicken: 6.49, rice: 5}, 11.49],
+          [{ham: 4.99, cheese: 3.5, belvita_bars: 3.49}, 11.98],
+          [{yogurt: 2.99, celery: 2.99, milk: 2.49, potatoes: 2, bread: 1.99}, 12.46]
         ]
       )
     end
