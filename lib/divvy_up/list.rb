@@ -8,14 +8,54 @@ module DivvyUp
 
     def split(groups)
       return [self.items] if groups == 1
+      determine_best_result(groups)
+    end
+
+    private
+
+    def permute(groups)
       permutations = generate_list_permutations
       permutation_price_differences = calculate_permutation_price_differences(permutations, groups)
       sorted_price_differences = generate_list_combinations(permutation_price_differences)
       list_possibilities = find_full_list(permutation_price_differences, sorted_price_differences)
-      output_final_lists(list_possibilities, groups)
+      calculate_list_totals(list_possibilities, groups)
     end
 
-    private
+    def snake(groups)
+      unassigned_items = self.items.sort_by { |item, price| price }.to_a
+      permutations = []
+      groups.times { permutations << {} }
+      until unassigned_items.empty? do
+        permutations.each do |permutation|
+          permutation[unassigned_items.last.first] = unassigned_items.last.last
+          unassigned_items.pop
+        end
+        permutations.reverse_each do |permutation|
+          permutation[unassigned_items.last.first] = unassigned_items.last.last unless unassigned_items.empty?
+          unassigned_items.pop
+        end
+      end
+      calculate_list_totals(permutations, groups)
+    end
+
+    def price_is_right(groups)
+      unassigned_items = self.items.sort_by { |item, price| price }.to_a
+      permutations = []
+      groups.times { permutations << {} }
+      permutations.each do |permutation|
+        total = 0
+        until total > target_amount(groups) || unassigned_items.empty? do
+          next_item = unassigned_items.pop
+          permutation[next_item.first] = next_item.last
+          total = permutation.values.reduce(:+).nil? ? 0 : permutation.values.reduce(:+)
+          if total > target_amount(groups)
+            permutation.delete(next_item.first)
+            unassigned_items << next_item
+          end unless permutation == permutations.last || permutation.count == 1
+        end
+      end
+      calculate_list_totals(permutations, groups)
+    end
 
     def target_amount(divisor)
       (self.items.values.reduce(:+) / divisor).round(2)
@@ -74,7 +114,7 @@ module DivvyUp
       output
     end
 
-    def output_final_lists(lists, groups)
+    def calculate_list_totals(lists, groups)
       output = []
       accounted_items = []
       until output.size == groups
@@ -87,6 +127,25 @@ module DivvyUp
         end
       end
       output
+    end
+
+    def determine_best_result(groups)
+      permute_result = permute(groups)
+      snake_result = snake(groups)
+      price_is_right_result = price_is_right(groups)
+      results = [permute_result, snake_result, price_is_right_result]
+      target = target_amount(groups)
+      result_differences = []
+      results.each do |result|
+        result_totals = []
+        result.each do |list|
+          result_totals << list.last
+        end
+        min_difference = (result_totals.min - target).abs
+        max_difference = (result_totals.max - target).abs
+        result_differences << (min_difference > max_difference ? min_difference : max_difference)
+      end
+      results[result_differences.index(result_differences.min)]
     end
   end
 end
