@@ -130,15 +130,14 @@ module DivvyUp
       snake_result = snake
       price_is_right_result = price_is_right
       results = [permute_result, snake_result, price_is_right_result]
-      target = target_amount
       result_differences = []
       results.each do |result|
         result_totals = []
         result.each do |list|
           result_totals << list.last
         end
-        min_difference = (result_totals.min - target).abs
-        max_difference = (result_totals.max - target).abs
+        min_difference = (result_totals.min - target_amount).abs
+        max_difference = (result_totals.max - target_amount).abs
         result_differences << (min_difference > max_difference ? min_difference : max_difference)
       end
       results[result_differences.index(result_differences.min)]
