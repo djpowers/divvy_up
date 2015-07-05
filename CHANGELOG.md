@@ -3,8 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-
-- Your contribution here!
+### Changed
+- Refactor method and variable names and store `groups` as instance variable
 
 ## [0.1.0] - 2015-07-04
 ### Changed
