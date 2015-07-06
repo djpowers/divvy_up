@@ -3,8 +3,10 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-### Changed
-- Refactor method and variable names and store `groups` as instance variable
+
+## [0.1.1] - 2015-07-05
+### Fixed
+- Resolve error occurring in `#split` method for certain list and group number combinations
 
 ## [0.1.0] - 2015-07-04
 ### Changed
@@ -13,5 +15,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## 0.0.1 - 2015-03-09
 - Initial release
 
-[unreleased]: https://github.com/djpowers/divvy_up/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/djpowers/divvy_up/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/djpowers/divvy_up/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/djpowers/divvy_up/compare/v0.0.1...v0.1.0
