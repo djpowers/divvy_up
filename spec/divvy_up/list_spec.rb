@@ -76,5 +76,16 @@ module DivvyUp
         ]
       )
     end
+
+    it "splits a large list into three groups" do
+      shopping_list = { orange_juice: 3, eggs_dozen_1: 2.99, eggs_dozen_2: 2.99, frozen_strawberries: 2.99, spring_mix: 4.99, bacon: 4.99, onion: 1.25, rasberries: 3.99, paper_towels: 1.59 }
+      list = DivvyUp::List.new(shopping_list)
+      expect(list.split(2)).to eql(
+        [
+          [{orange_juice: 3, spring_mix: 4.99, bacon: 4.99, onion: 1.25}, 14.23],
+          [{eggs_dozen_1: 2.99, eggs_dozen_2: 2.99, frozen_strawberries: 2.99, rasberries: 3.99, paper_towels: 1.59}, 14.55]
+        ]
+      )
+    end
   end
 end

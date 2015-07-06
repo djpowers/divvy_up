@@ -27,7 +27,7 @@ module DivvyUp
       @groups.times { permutations << {} }
       until unassigned_items.empty? do
         permutations.each do |permutation|
-          permutation[unassigned_items.last.first] = unassigned_items.last.last
+          permutation[unassigned_items.last.first] = unassigned_items.last.last unless unassigned_items.empty?
           unassigned_items.pop
         end
         permutations.reverse_each do |permutation|
