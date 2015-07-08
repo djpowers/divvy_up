@@ -113,15 +113,14 @@ module DivvyUp
     def output_final_sublists(sublist_options_sorted)
       sublists = []
       accounted_items = []
-      until sublists.size == @groups
-        sublist_options_sorted.each do |list|
-          if (accounted_items & list.keys).empty?
-            sublists << [list, (list.values.reduce(:+)).round(2)]
-            accounted_items << list.keys
-            accounted_items.flatten!
-          end
+      sublist_options_sorted.each do |list|
+        if (accounted_items & list.keys).empty?
+          sublists << [list, (list.values.reduce(:+)).round(2)]
+          accounted_items << list.keys
+          accounted_items.flatten!
         end
       end
+      sublists = nil if sublists.count > @groups
       sublists
     end
 
@@ -130,6 +129,7 @@ module DivvyUp
       snake_result = snake
       price_is_right_result = price_is_right
       results = [permute_result, snake_result, price_is_right_result]
+      results.delete(nil)
       result_differences = []
       results.each do |result|
         result_totals = []
