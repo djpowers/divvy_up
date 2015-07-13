@@ -88,7 +88,7 @@ module DivvyUp
       )
     end
 
-    it "splits a large list into three groups" do
+    it "splits a list where permute technique does not return a valid result" do
       shopping_list = { orange_juice_1: 3, orange_juice_2: 3, eggs_dozen: 2.99, spring_mix_16_oz: 6.99, bacon: 4.99, pasta_sauce: 2.50, blueberries: 3.99, frozen_strawberries: 2.99, olive_oil: 8.99, paper_towels: 1.59, toilet_paper: 1.99, aluminum_foil: 3 }
       list = DivvyUp::List.new(shopping_list)
       expect(list.split(3)).to eql(
