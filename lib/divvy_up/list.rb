@@ -3,7 +3,7 @@ module DivvyUp
     attr_reader :items
 
     def initialize(items)
-      @items = items
+      @items = parse_items(items)
     end
 
     def split(groups)
@@ -13,6 +13,15 @@ module DivvyUp
     end
 
     private
+
+    def parse_items(items)
+      items.each do |item, attributes|
+        next if attributes.is_a? Numeric
+        if attributes[:quantity].nil?
+          items[item] = attributes[:price]
+        end
+      end
+    end
 
     def permute
       sublists = sublist_permutations

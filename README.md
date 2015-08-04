@@ -30,7 +30,7 @@ shopping_list = {
   orange_juice: 3,
   lettuce: 7,
   strawberries: 3,
-  eggs: 2.79,
+  eggs: { price: 2.79 },
   carrots: 2.5,
   onion: 1.25,
   tomato: 1.25,

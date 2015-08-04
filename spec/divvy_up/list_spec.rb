@@ -4,7 +4,7 @@ module DivvyUp
         orange_juice: 3,
         lettuce: 7,
         strawberries: 3,
-        eggs: 2.79,
+        eggs: { price: 2.79 },
         carrots: 2.5,
         onion: 1.25,
         tomato: 1.25,
@@ -42,7 +42,7 @@ module DivvyUp
                                    [{bananas: 2.40, pears: 3.20}, 5.60]])
     end
 
-    it "splits a list into three groups" do
+    it "splits a list with attributes hash into three groups" do
       list = DivvyUp::List.new(shopping_list)
       expect(list.split(3)).to eql(
         [
