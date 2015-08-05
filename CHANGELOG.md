@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Allow specifying item price via hash attribute
+- Allow specifying quantity of item via hash attribute
 
 ## [0.1.2] - 2015-07-09
 ### Fixed
