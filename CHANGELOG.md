@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [0.2.0] - 2015-08-04
 ### Added
 - Allow specifying item price via hash attribute
 - Allow specifying quantity of item via hash attribute
@@ -22,7 +24,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## 0.0.1 - 2015-03-09
 - Initial release
 
-[unreleased]: https://github.com/djpowers/divvy_up/compare/v0.1.2...HEAD
+[unreleased]: https://github.com/djpowers/divvy_up/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/djpowers/divvy_up/compare/v0.1.2...v0.2.0
 [0.1.2]: https://github.com/djpowers/divvy_up/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/djpowers/divvy_up/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/djpowers/divvy_up/compare/v0.0.1...v0.1.0
