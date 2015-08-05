@@ -27,7 +27,7 @@ Or install it yourself as:
 
 ```ruby
 shopping_list = {
-  orange_juice: 3,
+  orange_juice: { price: 3, quantity: 2 },
   lettuce: 7,
   strawberries: 3,
   eggs: { price: 2.79 },

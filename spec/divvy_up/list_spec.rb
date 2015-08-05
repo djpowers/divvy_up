@@ -1,9 +1,8 @@
 module DivvyUp
   describe List do
     let(:shopping_list) { {
-        orange_juice: 3,
+        orange_juice: { price: 3, quantity: 2 },
         lettuce: 7,
-        strawberries: 3,
         eggs: { price: 2.79 },
         carrots: 2.5,
         onion: 1.25,
@@ -27,7 +26,9 @@ module DivvyUp
 
     it "splits a list into one group" do
       list = DivvyUp::List.new(shopping_list)
-      expect(list.split(1)).to eql([shopping_list])
+      expect(list.split(1)).to eql(
+        [{:lettuce=>7, :eggs=>2.79, :carrots=>2.5, :onion=>1.25, :tomato=>1.25, :blueberries=>3.99, :butter=>2.69, :pasta_sauce=>2.5, :pepper=>2, :celery=>1.69, :orange_juice_1=>3, :orange_juice_2=>3}]
+      )
     end
 
     it "splits a two-item list into two groups" do
@@ -46,9 +47,9 @@ module DivvyUp
       list = DivvyUp::List.new(shopping_list)
       expect(list.split(3)).to eql(
         [
-          [{orange_juice: 3, eggs: 2.79, carrots: 2.5, onion: 1.25, celery: 1.69}, 11.23],
-          [{lettuce: 7, strawberries: 3, tomato: 1.25}, 11.25],
-          [{blueberries: 3.99, butter: 2.69, pasta_sauce: 2.5, pepper: 2}, 11.18]
+          [{:eggs=>2.79, :carrots=>2.5, :onion=>1.25, :butter=>2.69, :pepper=>2}, 11.23],
+          [{:tomato=>1.25, :blueberries=>3.99, :orange_juice_1=>3, :orange_juice_2=>3}, 11.24],
+          [{:lettuce=>7, :pasta_sauce=>2.5, :celery=>1.69}, 11.19]
         ]
       )
     end
