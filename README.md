@@ -27,10 +27,10 @@ Or install it yourself as:
 
 ```ruby
 shopping_list = {
-  orange_juice: 3,
+  orange_juice: { price: 3, quantity: 2 },
   lettuce: 7,
   strawberries: 3,
-  eggs: 2.79,
+  eggs: { price: 2.79 },
   carrots: 2.5,
   onion: 1.25,
   tomato: 1.25,
@@ -44,11 +44,17 @@ shopping_list = {
 DivvyUp::List.new(shopping_list).split(3)
 # =>
 # [
-#   [{:orange_juice=>3, :eggs=>2.79, :carrots=>2.5, :onion=>1.25, :celery=>1.69}, 11.23],
-#   [{:lettuce=>7, :strawberries=>3, :tomato=>1.25}, 11.25],
-#   [{:blueberries=>3.99, :butter=>2.69, :pasta_sauce=>2.5, :pepper=>2}, 11.18]
+#   [{:eggs=>2.79, :carrots=>2.5, :onion=>1.25, :butter=>2.69, :pepper=>2}, 11.23],
+#   [{:tomato=>1.25, :blueberries=>3.99, :orange_juice_1=>3, :orange_juice_2=>3}, 11.24],
+#   [{:lettuce=>7, :pasta_sauce=>2.5, :celery=>1.69}, 11.19]
 # ]
 ```
+
+Pass a hash as an argument when creating a new List, where the keys are the item
+names, and the values are the prices, as an integer or float.
+
+Optionally, you may specify the price in an attributes hash. If you have more
+than one of an item, you can specify the quantity here as well.
 
 Output of `#split` method consists of an array of arrays, where each subarray
 is a hash of items and the total value of those items.
